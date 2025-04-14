@@ -59,3 +59,10 @@ pip install webcolors==1.11.1
 python daltonismo.py
 ```
 6. Pressione Q para sair a qualquer momento.
+
+---
+
+## 🎥 Ilustrações
+![Ilustração de uso](1.png)
+
+![Ilustração de uso](2.png)
