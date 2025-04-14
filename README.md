@@ -15,7 +15,7 @@
 
 ## 🧩 Funcionalidades
 
-- 🎯 Detecção da cor central ou de pontos clicados no vídeo.
+- 🎯 Detecção de pontos clicados no vídeo.
 - 🎨 Identificação da cor exata ou a mais próxima da tabela CSS3.
 - 🧠 Cálculo da distância entre cores RGB.
 - 🗣️ Anúncio da cor via voz (TTS).
