@@ -1,6 +1,15 @@
 # 🎨 ColorEye - Detecção de Cores com Simulação de Daltonismo
 
-Um projeto em Python que detecta cores em vídeos, exibe o nome da cor com base nos padrões CSS3 e simula como essas cores são vistas por pessoas com **deuteranopia** (tipo de daltonismo). Além disso, o sistema utiliza síntese de voz para anunciar a cor detectada.
+**ColorEye** é um projeto desenvolvido para auxiliar pessoas com daltonismo a identificar cores com mais precisão em ambientes visuais, como **galerias de arte**. A ferramenta detecta cores em tempo real a partir de vídeos, simula a visão com deuteranopia (um tipo comum de daltonismo) e utiliza síntese de voz para anunciar a cor detectada. Assim, o visitante pode ter uma experiência mais rica, entendendo as cores originais de obras e ambientes.
+
+---
+
+## 👤 Integrantes
+
+- Ana Eliza - RM 96277
+- Lara Gonçalves - RM 95028
+- Leonardo Alves - RM 93868
+- Vinicius Panessa - RM 94591
 
 ---
 
@@ -24,23 +33,29 @@ Antes de iniciar, certifique-se de ter:
 
 ---
 
-## 📦 Instalação das dependências
-
-Execute os comandos abaixo no terminal para instalar as bibliotecas necessárias:
-
-```bash
-pip install opencv-python
-pip install numpy
-pip install pyttsx3
-pip install webcolors
-```
-
 ## ▶️ Como executar o projeto
 
 1. Clone ou baixe este repositório.
 2. Certifique-se de que o vídeo video.mp4 esteja presente na raiz do projeto (já incluso no repositório).
-3. Execute o script:
+3. Crie o ambiente virtual e ative-o:
+```
+python -m venv venv
+
+#windows 
+venv\Scripts\activate
+
+#linux/macOS 
+source venv/bin/activate
+``` 
+4. Instale as dependências:
+```bash
+pip install opencv-python
+pip install numpy
+pip install pyttsx3
+pip install webcolors==1.11.1
+```
+5. Execute o script:
 ```bash
 python daltonismo.py
 ```
-4. Pressione Q para sair a qualquer momento.
+6. Pressione Q para sair a qualquer momento.
