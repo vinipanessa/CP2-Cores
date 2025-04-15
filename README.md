@@ -42,7 +42,7 @@ Antes de iniciar, certifique-se de ter:
 python -m venv venv
 
 #windows 
-venv\Scripts\activate
+venv/Scripts/activate
 
 #linux/macOS 
 source venv/bin/activate
