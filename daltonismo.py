@@ -7,9 +7,12 @@ from webcolors import CSS3_NAMES_TO_HEX, hex_to_rgb, rgb_to_name
 # Inicializa o mecanismo de voz
 tts_engine = pyttsx3.init()
 
+# Calcula a "distância" entre duas cores no formato RGB 
+# Quanto menor o valor retornado, mais parecidas as cores são.
 def distancia_cor(rgb1, rgb2):
     return np.sqrt(sum((a - b) ** 2 for a, b in zip(rgb1, rgb2)))
 
+# Tenta encontrar a cor, caso não ache, retorna desconhecida
 def encontrar_nome_cor_detalhado(rgb):
     try:
         nome_exato = rgb_to_name(rgb, spec='css3')
@@ -27,6 +30,7 @@ def encontrar_nome_cor_detalhado(rgb):
                 rgb_proximo = rgb_css
         return nome_proximo, min_distancia, rgb_proximo
 
+# Inserção do Texto com a cor (além do RGB)
 def desenhar_texto_com_fundo(img, texto, pos, fonte, escala,
                              cor_texto, cor_fundo, espessura):
     (w, h), _ = cv2.getTextSize(texto, fonte, escala, espessura)
@@ -34,6 +38,7 @@ def desenhar_texto_com_fundo(img, texto, pos, fonte, escala,
     cv2.rectangle(img, (x - 5, y - h - 5), (x + w + 5, y + 5), cor_fundo, -1)
     cv2.putText(img, texto, (x, y), fonte, escala, cor_texto, espessura, cv2.LINE_AA)
 
+#Simulação do daltonismo que representa dificuldade da percepção da cor verde 
 def simular_deuteranopia(img):
     transform = np.array([[0.625, 0.7, 0],
                           [0.7, 0.625, 0],
@@ -41,6 +46,7 @@ def simular_deuteranopia(img):
     return cv2.transform(img, transform.astype(np.float32))
 cor_clicada = None
 
+# Evento do clique para identificar a cor na tela
 def click_event(event, x, y, flags, param):
     global cor_clicada
     frame = param['frame']
@@ -48,6 +54,8 @@ def click_event(event, x, y, flags, param):
         b, g, r = frame[y, x]
         cor_clicada = (r, g, b)
 
+# Cópia do vídeo na representação daltonica (Deuteranopia)
+# Apresenta a Cor no clique
 def processar_video_daltonismo(video_path):
     global cor_clicada
     cap = cv2.VideoCapture(video_path)
@@ -101,6 +109,6 @@ def processar_video_daltonismo(video_path):
     cap.release()
     cv2.destroyAllWindows()
 
-# Caminho para o vídeo local
+# Caminho para o vídeo localmente
 video_path = r"tourVirtual-galeriaArte.mp4"
 processar_video_daltonismo(video_path)
