@@ -3,10 +3,13 @@ import numpy as np
 import pyttsx3
 import time
 from webcolors import CSS3_NAMES_TO_HEX, hex_to_rgb, rgb_to_name
+
 # Inicializa o mecanismo de voz
 tts_engine = pyttsx3.init()
+
 def distancia_cor(rgb1, rgb2):
     return np.sqrt(sum((a - b) ** 2 for a, b in zip(rgb1, rgb2)))
+
 def encontrar_nome_cor_detalhado(rgb):
     try:
         nome_exato = rgb_to_name(rgb, spec='css3')
@@ -23,24 +26,28 @@ def encontrar_nome_cor_detalhado(rgb):
                 nome_proximo = nome_css
                 rgb_proximo = rgb_css
         return nome_proximo, min_distancia, rgb_proximo
+
 def desenhar_texto_com_fundo(img, texto, pos, fonte, escala,
                              cor_texto, cor_fundo, espessura):
     (w, h), _ = cv2.getTextSize(texto, fonte, escala, espessura)
     x, y = pos
     cv2.rectangle(img, (x - 5, y - h - 5), (x + w + 5, y + 5), cor_fundo, -1)
     cv2.putText(img, texto, (x, y), fonte, escala, cor_texto, espessura, cv2.LINE_AA)
+
 def simular_deuteranopia(img):
     transform = np.array([[0.625, 0.7, 0],
                           [0.7, 0.625, 0],
                           [0, 0, 1]])
     return cv2.transform(img, transform.astype(np.float32))
 cor_clicada = None
+
 def click_event(event, x, y, flags, param):
     global cor_clicada
     frame = param['frame']
     if event == cv2.EVENT_LBUTTONDOWN and x < frame.shape[1]:  # Considera apenas lado esquerdo
         b, g, r = frame[y, x]
         cor_clicada = (r, g, b)
+
 def processar_video_daltonismo(video_path):
     global cor_clicada
     cap = cv2.VideoCapture(video_path)
@@ -88,11 +95,12 @@ def processar_video_daltonismo(video_path):
         cv2.setMouseCallback(
             'ColorEye - Detecção de Cor com Daltonismo',
             click_event, param={'frame': frame})
-        cv2.imshow('ColorEye - Detecção de Cor com Daltonismo', frame_comparado)
+        cv2.imshow('ColorEye - Deteccao de Cor com Daltonismo', frame_comparado)
         if cv2.waitKey(30) & 0xFF == ord('q'):
             break
     cap.release()
     cv2.destroyAllWindows()
+
 # Caminho para o vídeo local
 video_path = r"tourVirtual-galeriaArte.mp4"
 processar_video_daltonismo(video_path)
